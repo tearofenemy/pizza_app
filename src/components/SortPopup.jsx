@@ -43,12 +43,17 @@ const SortPopup = ({ items }) => {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={togglePopup}>{items[selectedItem]}</span>
+                <span onClick={togglePopup}>{items[selectedItem].name}</span>
             </div>
             {visiblePopup && <div className="sort__popup">
                 <ul>
-                    {items && items.map((item, index) => (
-                        <li className={selectedItem === index ? 'active' : ''} key={`${item}_${index}`} onClick={() => selectItemHandler(index)}>{item}</li>
+                    {items && items.map((obj, index) => (
+                        <li 
+                            className={selectedItem === index ? 'active' : ''} 
+                            key={`${obj.type}_${index}`} 
+                            onClick={() => selectItemHandler(index)}>
+                            {obj.name}
+                        </li>
                     ))}
                 </ul>
             </div>}

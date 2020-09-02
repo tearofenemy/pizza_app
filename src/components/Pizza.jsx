@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
 
 const Pizza = ({ name, imageUrl, price, types, sizes }) => {
 
@@ -39,6 +38,7 @@ const Pizza = ({ name, imageUrl, price, types, sizes }) => {
                             >{type}
                         </li>
                     ))}
+        
                 </ul>
                 <ul>
                     {availableSizes.map((size, index) => (
@@ -76,13 +76,5 @@ const Pizza = ({ name, imageUrl, price, types, sizes }) => {
         </div>
     )
 }
-
-Pizza.propTypes = {
-    name: PropTypes.string.isRequired,
-    imageUrl: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    types: PropTypes.arrayOf([PropTypes.number]).isRequired,
-    sizes: PropTypes.arrayOf([PropTypes.number]).isRequired
-};
 
 export default Pizza;
