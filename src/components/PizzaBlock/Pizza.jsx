@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
+import LoadingBlock from './LoadingBlock';
 
-const Pizza = ({ name, imageUrl, price, types, sizes }) => {
+const Pizza = ({ name, imageUrl, price, types, sizes, isLoaded }) => {
 
     const availableTypes = ['тонкое', 'традиционное'];
     const availableSizes = [26, 30, 40];
@@ -15,6 +16,10 @@ const Pizza = ({ name, imageUrl, price, types, sizes }) => {
 
     const onSelectSize = index => {
         setActiveSize(index);
+    }
+
+    if(isLoaded) {
+        return <LoadingBlock/>;
     }
 
     return (
