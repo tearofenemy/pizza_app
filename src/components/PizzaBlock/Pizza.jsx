@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import LoadingBlock from './LoadingBlock';
+import Button from '../Button';
 
-const Pizza = ({ name, imageUrl, price, types, sizes, isLoaded }) => {
+const Pizza = ({ id, name, imageUrl, price, types, sizes, isLoaded, onAddToCart, addedCount }) => {
 
     const availableTypes = ['тонкое', 'традиционное'];
     const availableSizes = [26, 30, 40];
 
-    const [activeSize, setActiveSize] = useState(sizes[0]); 
+    const [activeSize, setActiveSize] = useState(0); 
     const [activeType, setActiveType] = useState(types[0]);
 
     const onSelectType = index => {
@@ -16,6 +17,18 @@ const Pizza = ({ name, imageUrl, price, types, sizes, isLoaded }) => {
 
     const onSelectSize = index => {
         setActiveSize(index);
+    }
+
+    const onAddPizza = () => {
+        const obj = {
+            id,
+            name,
+            imageUrl,
+            price,
+            size: availableSizes[activeSize],
+            type: availableTypes[activeType]
+        };
+        onAddToCart(obj);
     }
 
     if(isLoaded) {
@@ -42,8 +55,7 @@ const Pizza = ({ name, imageUrl, price, types, sizes, isLoaded }) => {
                             })}
                             >{type}
                         </li>
-                    ))}
-        
+                    ))}    
                 </ul>
                 <ul>
                     {availableSizes.map((size, index) => (
@@ -61,7 +73,7 @@ const Pizza = ({ name, imageUrl, price, types, sizes, isLoaded }) => {
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add">
+                <Button clicked={onAddPizza} outline className="button--add">
                     <svg
                         width="12"
                         height="12"
@@ -75,8 +87,8 @@ const Pizza = ({ name, imageUrl, price, types, sizes, isLoaded }) => {
                         />
                     </svg>
                     <span>Добавить</span>
-                    <i>2</i>
-                </div>
+                    {addedCount && <i>{addedCount}</i>}
+                </Button>
             </div>
         </div>
     )
